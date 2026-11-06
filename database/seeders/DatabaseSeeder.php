@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +11,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // 1. Buat User Admin
         \App\Models\User::create([
             'name' => 'Admin Utama',
             'email' => 'admin@store.com',
             'password' => bcrypt('admin123'),
             'role' => 'admin',
+        ]);
+
+        // 2. Panggil Seeder Kategori dan Produk
+        $this->call([
+            CategorySeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }

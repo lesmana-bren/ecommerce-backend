@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\AduanController;
+
 
 // Public Routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -18,8 +20,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
 
-    // Mutasi Data
+    // Mutasi Data Produk
     Route::post('/products', [ProductController::class, 'store']);
-    Route::post('/products/{id}', [ProductController::class, 'update']); // Mendukung upload file + method override
+    Route::post('/products/{id}', [ProductController::class, 'update']); 
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+
+    // Resources Aduan
+    Route::apiResource('aduan', AduanController::class);
 });
